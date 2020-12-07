@@ -313,20 +313,18 @@ router.delete(
       if (!post) return res.status(404).json("Post not found");
 
       const comment = post.comments.find(
-        (comment) => comment._id.toString() !== req.params.comment_id.toString()
+        (comment) => comment._id.toString() === req.params.comment_id.toString()
       );
 
       const removeLikeFromComment = comment.likes.filter(
-        (like) => like.id.toString() !== req.params.like_id.toString()
+        (like) => like._id.toString() !== req.params.like_id.toString()
       );
 
-      comment = removeLikeFromComment;
-
-      post.comments = comment;
+      comment.likes = removeLikeFromComment;
 
       await post.save();
 
-      res.json(removeLikeFromComment);
+      res.json(post);
     } catch (error) {
       console.error(error);
       return res.status(500).json("Server Error...");
