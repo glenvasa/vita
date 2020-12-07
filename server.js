@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json({ extended: false }));
 
 // Routes
-app.use("/api/posts", require("./routes/users.js"));
+app.use("/api/posts", require("./routes/posts.js"));
 app.use("/api/users", require("./routes/users.js"));
 
 // create variable to specify which port app will run; depends if runnng on heroku or locally
