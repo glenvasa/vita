@@ -40,3 +40,15 @@ module.exports.changeUserPasswordValidator = [
     "New password should be between 6 and 12 characters"
   ).isLength({ min: 6, max: 12 }),
 ];
+
+module.exports.createPostValidator = [
+  check("textOfThePost", "Text is required").not().isEmpty(),
+];
+
+module.exports.searchForPostValidator = [
+  check("searchInput", "Search is empty").not().isEmpty(),
+];
+
+module.exports.addCommentValidator = [
+  check("textOfTheComment", "Comment is empty").not().isEmpty(),
+];
