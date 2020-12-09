@@ -10,6 +10,7 @@ const initialState = {
   token: localStorage.getItem("token"),
   users: {},
   user: {},
+  errors: {},
   isLoggedIn: false,
   isAllowedToChangePassword: false,
   isPasswordChanged: false,
@@ -20,7 +21,7 @@ const auth = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case AUTH_FORM_SUCCESS:
-      localStorage.setItem("token", payload.token.data);
+      localStorage.setItem("token", payload.token);
       return {
         ...state,
         ...payload,
@@ -28,6 +29,7 @@ const auth = (state = initialState, action) => {
         isAllowedToChangePassword: false,
         isPasswordChanged: false,
         isLoading: false,
+        errors: {},
       };
     case AUTH_FORM_FAIL:
     case AUTH_ERROR:
@@ -42,17 +44,20 @@ const auth = (state = initialState, action) => {
         isAllowedToChangePassword: false,
         isPasswordChanged: false,
         isLoading: false,
+        errors: payload,
       };
     case USER_IS_LOADED:
+      localStorage.getItem("token");
       return {
         ...state,
         ...payload,
         users: {},
-        user: payload.data,
+        user: payload,
         isLoggedIn: true,
         isAllowedToChangePassword: false,
         isPasswordChanged: false,
         isLoading: false,
+        errors: {},
       };
 
     default:
