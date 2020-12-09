@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -8,12 +8,16 @@ import RegisterPage from "./pages/RegisterPage";
 import store from "./store";
 import { Provider } from "react-redux";
 import setAuthenticationToken from "./middleware/setAuthenticationToken";
+import { userLoaded } from "./actions/auth.actions";
 
 if (localStorage.getItem("token")) {
   setAuthenticationToken(localStorage.getItem("token"));
 }
 
 const App = () => {
+  useEffect(() => {
+    store.dispatch(userLoaded());
+  }, []);
   return (
     <Router>
       <Provider store={store}>
