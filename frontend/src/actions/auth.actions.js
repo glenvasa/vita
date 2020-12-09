@@ -13,12 +13,7 @@ export const userLoaded = () => async (dispatch) => {
     setAuthenticationToken(localStorage.getItem("token"));
   }
   try {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    const response = axios.get("http://localhost:5000/api/users/", config);
+    const response = await axios.get("http://localhost:5000/api/users/");
     dispatch({
       type: USER_IS_LOADED,
       payload: response.data,
