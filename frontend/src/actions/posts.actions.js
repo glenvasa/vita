@@ -1,7 +1,6 @@
 import {
   MAKE_POST,
   POST_ERROR,
-  GET_USER_POSTS,
   REMOVE_POST,
   GET_POSTS,
   GET_POST,
@@ -14,7 +13,6 @@ import {
   THE_MOST_RECENT_POSTS,
   REMOVE_LIKE,
   ADD_COMMENT,
-  GET_POST_BY_USER_ID,
   LIKE_COMMENT,
   REMOVE_LIKE_FROM_COMMENT,
   REMOVE_COMMENT,
@@ -103,32 +101,6 @@ export const getPost = (post_id) => async (dispatch) => {
       `http://localhost:5000/api/posts/single_post/${post_id}`
     );
     dispatch({ type: GET_POST, payload: res.data });
-  } catch (error) {
-    dispatch({
-      type: POST_ERROR,
-      payload: error,
-    });
-  }
-};
-
-export const getUserPostsById = (user_id) => async (dispatch) => {
-  try {
-    const res = await axios.get(
-      `http://localhost:5000/api/posts/user_posts/${user_id}`
-    );
-    dispatch({ type: GET_POST_BY_USER_ID, payload: res.data });
-  } catch (error) {
-    dispatch({
-      type: POST_ERROR,
-      payload: error,
-    });
-  }
-};
-
-export const getUserPosts = () => async (dispatch) => {
-  try {
-    const res = await axios.get(`http://localhost:5000/api/posts/user_posts/`);
-    dispatch({ type: GET_USER_POSTS, payload: res.data });
   } catch (error) {
     dispatch({
       type: POST_ERROR,
