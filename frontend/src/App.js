@@ -9,6 +9,8 @@ import store from "./store";
 import { Provider } from "react-redux";
 import setAuthenticationToken from "./middleware/setAuthenticationToken";
 import { userLoaded } from "./actions/auth.actions";
+import IsLoggedInRoute from "./routes/IsLoggedInRoute";
+import PrivateRoute from "./routes/PrivateRoute";
 
 if (localStorage.getItem("token")) {
   setAuthenticationToken(localStorage.getItem("token"));
@@ -24,8 +26,8 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route path="/" exact component={LandingPage} />
-          <Route path="/register" exact component={RegisterPage} />
-          <Route path="/login" exact component={LoginPage} />
+          <IsLoggedInRoute path="/register" exact component={RegisterPage} />
+          <IsLoggedInRoute path="/login" exact component={LoginPage} />
         </Switch>
         <Footer />
       </Provider>
