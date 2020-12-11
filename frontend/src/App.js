@@ -11,6 +11,7 @@ import setAuthenticationToken from "./middleware/setAuthenticationToken";
 import { userLoaded } from "./actions/auth.actions";
 import IsLoggedInRoute from "./routes/IsLoggedInRoute";
 import PrivateRoute from "./routes/PrivateRoute";
+import "./App.css";
 
 if (localStorage.getItem("token")) {
   setAuthenticationToken(localStorage.getItem("token"));
